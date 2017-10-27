@@ -9,13 +9,13 @@
 
 # Global vars
 PROG_NAME='DockerTinyproxy'
-PROXY_CONF='/etc/tinyproxy.conf'
+PROXY_CONF='/etc/tinyproxy/tinyproxy.conf'
 TAIL_LOG='/var/log/tinyproxy/tinyproxy.log'
 
 # Usage: screenOut STATUS message
 screenOut() {
     timestamp=$(date +"%H:%M:%S")
-    
+
     if [ "$#" -ne 2 ]; then
         status='INFO'
         message="$1"
@@ -87,7 +87,7 @@ setMiscConfig() {
     sed -i -e"s,^MaxSpareServers ,MaxSpareServers\t1 ," $PROXY_CONF
     checkStatus $? "Set MinSpareServers - Could not edit $PROXY_CONF" \
                    "Set MinSpareServers - Edited $PROXY_CONF successfully."
-    
+
     sed -i -e"s,^StartServers ,StartServers\t1 ," $PROXY_CONF
     checkStatus $? "Set MinSpareServers - Could not edit $PROXY_CONF" \
                    "Set MinSpareServers - Edited $PROXY_CONF successfully."
